@@ -54,11 +54,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.CRCBtn = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.GollBtn = new System.Windows.Forms.Button();
             this.DecodeBtn = new System.Windows.Forms.Button();
             this.EncodeBtn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.InputMessage2 = new System.Windows.Forms.TextBox();
+            this.ChangeBtn1 = new System.Windows.Forms.Button();
+            this.ChangeBtn2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -202,6 +204,8 @@
             // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.ChangeBtn2);
+            this.panel8.Controls.Add(this.ChangeBtn1);
             this.panel8.Controls.Add(this.label1);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(349, 312);
@@ -297,7 +301,7 @@
             this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.CRCBtn);
-            this.panel3.Controls.Add(this.button4);
+            this.panel3.Controls.Add(this.GollBtn);
             this.panel3.Controls.Add(this.DecodeBtn);
             this.panel3.Controls.Add(this.EncodeBtn);
             this.panel3.Controls.Add(this.label3);
@@ -345,15 +349,15 @@
             this.CRCBtn.UseVisualStyleBackColor = true;
             this.CRCBtn.Click += new System.EventHandler(this.CRCBtn_Click);
             // 
-            // button4
+            // GollBtn
             // 
-            this.button4.Location = new System.Drawing.Point(174, 54);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(91, 23);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Galleya code";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.GollBtn.Location = new System.Drawing.Point(174, 54);
+            this.GollBtn.Name = "GollBtn";
+            this.GollBtn.Size = new System.Drawing.Size(91, 23);
+            this.GollBtn.TabIndex = 6;
+            this.GollBtn.Text = "Galleya code";
+            this.GollBtn.UseVisualStyleBackColor = true;
+            this.GollBtn.Click += new System.EventHandler(this.button4_Click);
             // 
             // DecodeBtn
             // 
@@ -391,6 +395,26 @@
             this.InputMessage2.Name = "InputMessage2";
             this.InputMessage2.Size = new System.Drawing.Size(772, 32);
             this.InputMessage2.TabIndex = 3;
+            // 
+            // ChangeBtn1
+            // 
+            this.ChangeBtn1.Location = new System.Drawing.Point(110, -1);
+            this.ChangeBtn1.Name = "ChangeBtn1";
+            this.ChangeBtn1.Size = new System.Drawing.Size(107, 20);
+            this.ChangeBtn1.TabIndex = 10;
+            this.ChangeBtn1.Text = "Change one bit";
+            this.ChangeBtn1.UseVisualStyleBackColor = true;
+            this.ChangeBtn1.Click += new System.EventHandler(this.ChangeBtn1_Click);
+            // 
+            // ChangeBtn2
+            // 
+            this.ChangeBtn2.Location = new System.Drawing.Point(223, 0);
+            this.ChangeBtn2.Name = "ChangeBtn2";
+            this.ChangeBtn2.Size = new System.Drawing.Size(107, 20);
+            this.ChangeBtn2.TabIndex = 10;
+            this.ChangeBtn2.Text = "Change two bit";
+            this.ChangeBtn2.UseVisualStyleBackColor = true;
+            this.ChangeBtn2.Click += new System.EventHandler(this.ChangeBtn2_Click);
             // 
             // Form1
             // 
@@ -440,7 +464,7 @@
         private System.Windows.Forms.DataGridView ASCIIGrid;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button CRCBtn;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button GollBtn;
         private System.Windows.Forms.Button DecodeBtn;
         private System.Windows.Forms.Button EncodeBtn;
         private System.Windows.Forms.Label label3;
@@ -456,6 +480,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.TextBox EncodedMessage;
+        private System.Windows.Forms.Button ChangeBtn2;
+        private System.Windows.Forms.Button ChangeBtn1;
     }
 }
 

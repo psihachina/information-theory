@@ -2,12 +2,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RGR_Kudelin
@@ -17,6 +14,7 @@ namespace RGR_Kudelin
         public Form1()
         {
             InitializeComponent();
+            CultureInfo.CurrentCulture = new CultureInfo("ru-RU");
         }
 
         public struct ASCII
@@ -34,9 +32,7 @@ namespace RGR_Kudelin
                 {
                     var record = new ASCII();
                     record._char = item.Char;
-                    var buf = Convert.ToString(item.Char, 2);
-                    if (buf.Length == 11) record._code = buf.Substring(3, 8);
-                    if (buf.Length == 6) record._code = "00" + buf;
+                    record._code = Convert.ToString(Encoding.GetEncoding(CultureInfo.CurrentCulture.TextInfo.ANSICodePage).GetBytes(new char[] { item.Char })[0], 2);
                     result.Add(record);
                 }
 
@@ -85,8 +81,6 @@ namespace RGR_Kudelin
             public static double Entropy { get { return _entropy; } }
             public static double Avg { get { return _avg; } }
 
-
-
             public static FrequencyRecord[] GetFrequencyDictionary(string text)
             {
                 var result = new List<FrequencyRecord>();
@@ -123,7 +117,6 @@ namespace RGR_Kudelin
                 return result.ToArray();
             }
 
-
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -131,11 +124,6 @@ namespace RGR_Kudelin
             HaffmanGrid.DataSource = FrequencyRecord.GetFrequencyDictionary(InputMessage.Text);
             Entropy.Text = "Entropy: " + FrequencyRecord.Entropy;
             Avg.Text = "Avg bit/character: " + FrequencyRecord.Avg;
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
 
         static List<string> SplitString(string str, int count)
@@ -166,18 +154,17 @@ namespace RGR_Kudelin
         {
             EncodedMessage.Text = "";
             BinaryString.Text = "";
-
             ASCIIGrid.DataSource = ASCII.GetASCIIs(FrequencyRecord.GetFrequencyDictionary(InputMessage2.Text));
 
             foreach (var ch in InputMessage2.Text)
             {
-                if (Convert.ToString(ch, 2).Length == 11)
+                if (Convert.ToString(ch, 2).Length == 6)
                 {
-                    BinaryString.Text += Convert.ToString(ch, 2).Substring(3, 8);
+                    BinaryString.Text += "00" + Convert.ToString(Encoding.GetEncoding(CultureInfo.CurrentCulture.TextInfo.ANSICodePage).GetBytes(new char[] { ch })[0], 2);
                 }
-                else if (Convert.ToString(ch, 2).Length == 6)
+                else
                 {
-                    BinaryString.Text += "00" + Convert.ToString(ch, 2);
+                    BinaryString.Text += Convert.ToString(Encoding.GetEncoding(CultureInfo.CurrentCulture.TextInfo.ANSICodePage).GetBytes(new char[] { ch })[0], 2);
                 }
             }
 
@@ -230,7 +217,6 @@ namespace RGR_Kudelin
 
         private void DecodeBtn_Click(object sender, EventArgs e)
         {
-
             BinaryString.Text = "";
             InputMessage2.Text = "";
             foreach(var item in SplitString(EncodedMessage.Text, 7))
@@ -238,37 +224,14 @@ namespace RGR_Kudelin
                 BinaryString.Text += HamDec(item);
             }
             InputMessage2.Text = BinaryToString(BinaryString.Text);
-
-        }
-
-        public static string StringToBinary(string data)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            foreach (char c in data.ToCharArray())
-            {
-                sb.Append(Convert.ToString(c, 2));
-            }
-            return sb.ToString();
         }
 
         public string BinaryToString(string data)
         {
             List<Byte> byteList = new List<Byte>();
-            foreach (var item in SplitString(BinaryString.Text, 4))
-            {
-                if (item.Substring(0, 2) != "00100000" || item.Substring(0, 2) != "00101100" || item.Substring(0, 2) != "00101110")
-                {
-                    
-                    byteList.Add(Convert.ToByte(Convert.ToByte(item, 2)*2));
-                }
-                else
-                {
-                    byteList.Add(Convert.ToByte(Convert.ToByte(item, 2) * 2));
-
-                }
-            }
-            return Encoding.GetEncoding(1251).GetString(byteList.ToArray());
+            foreach (var item in SplitString(BinaryString.Text, 8))
+                byteList.Add(Convert.ToByte(item, 2));
+            return Encoding.GetEncoding(CultureInfo.CurrentCulture.TextInfo.ANSICodePage).GetString(byteList.ToArray());
         }
 
         string CodeCRC(string s)
@@ -286,7 +249,6 @@ namespace RGR_Kudelin
             }
             return xa;
         }
-
 
         private void CRCBtn_Click(object sender, EventArgs e)
         {
@@ -335,6 +297,28 @@ namespace RGR_Kudelin
                     c1 = "";
                 }
             }
+        }
+
+        private void ChangeBtn1_Click(object sender, EventArgs e)
+        {
+            var buf = "";
+            foreach(var item in SplitString(EncodedMessage.Text, 7))
+            {
+                buf += ((item[0] == '1') ? '0' : '1')  +  item.Substring(1, 6);
+            }
+
+            EncodedMessage.Text = buf;
+        }
+
+        private void ChangeBtn2_Click(object sender, EventArgs e)
+        {
+            var buf = "";
+            foreach (var item in SplitString(EncodedMessage.Text, 7))
+            {
+                buf += ((item[0] == '1') ? "0" : "1") + ((item[1] == '1') ? "0" : "1") + item.Substring(2, 5);
+            }
+
+            EncodedMessage.Text = buf;
         }
     }
 }
