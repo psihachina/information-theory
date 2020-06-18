@@ -19,6 +19,54 @@ namespace RGR_Kudelin
             InitializeComponent();
         }
 
+        public struct ASCII
+        {
+            private char _char;
+            private string _code;
+            public char Char { get { return _char; } }
+            public string Code { get { return _code; } }
+
+            public static ASCII[] GetASCIIs(FrequencyRecord[] frequencyRecords)
+            {
+                var result = new List<ASCII>();
+
+                foreach (var item in frequencyRecords)
+                {
+                    var record = new ASCII();
+                    record._char = item.Char;
+                    var buf = Convert.ToString(item.Char, 2);
+                    if (buf.Length == 11) record._code = buf.Substring(3, 8);
+                    if (buf.Length == 6) record._code = "00" + buf;
+                    result.Add(record);
+                }
+
+                return result.ToArray();
+            }
+        }
+
+        public struct Hamming
+        {
+            private string _char;
+            private string _code;
+            public string Char { get { return _char; } }
+            public string Code { get { return _code; } }
+
+            public static Hamming[] GetHammings(List<String> strings)
+            {
+                var result = new List<Hamming>();
+
+                foreach (var item in strings)
+                {
+                    var record = new Hamming();
+                    record._char = item;
+                    record._code = Ham(item);
+                    result.Add(record);
+                }
+
+                return result.ToArray();
+            }
+        }
+
         public struct FrequencyRecord
         {
             private char _char;
@@ -51,6 +99,7 @@ namespace RGR_Kudelin
                 {
                     var record = new FrequencyRecord();
                     record._char = huffmanTree.Frequencies.ElementAt(i).Key;
+                    
                     record._freq = huffmanTree.Frequencies.ElementAt(i).Value;
                     record._freqPercent = record._freq / ((float)text.Length);
                     foreach (var item in huffmanTree.EncodeChar(record._char))
@@ -79,9 +128,213 @@ namespace RGR_Kudelin
         private void button1_Click(object sender, EventArgs e)
         {
             
-            dataGridView1.DataSource = FrequencyRecord.GetFrequencyDictionary(textBox1.Text);
-            label1.Text = "Entropy: " + FrequencyRecord.Entropy;
-            label2.Text = "Avg bit/character: " + FrequencyRecord.Avg;
+            HaffmanGrid.DataSource = FrequencyRecord.GetFrequencyDictionary(InputMessage.Text);
+            Entropy.Text = "Entropy: " + FrequencyRecord.Entropy;
+            Avg.Text = "Avg bit/character: " + FrequencyRecord.Avg;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        static List<string> SplitString(string str, int count)
+        {
+            List<string> list = new List<string>();
+            int i = 0;
+            while (i < str.Length - 1)
+            {
+                list.Add(str.Substring(i, count));
+                i += count;
+            }
+            return list;
+        }
+
+        static List<string> SplitString(string str, int count, int k)
+        {
+            List<string> list = new List<string>();
+            int i = 0;
+            while (i < str.Length - 1)
+            {
+                list.Add(str.Substring(i, count).Substring(4,4));
+                i += count;
+            }
+            return list;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            EncodedMessage.Text = "";
+            BinaryString.Text = "";
+
+            ASCIIGrid.DataSource = ASCII.GetASCIIs(FrequencyRecord.GetFrequencyDictionary(InputMessage2.Text));
+
+            foreach (var ch in InputMessage2.Text)
+            {
+                if (Convert.ToString(ch, 2).Length == 11)
+                {
+                    BinaryString.Text += Convert.ToString(ch, 2).Substring(3, 8);
+                }
+                else if (Convert.ToString(ch, 2).Length == 6)
+                {
+                    BinaryString.Text += "00" + Convert.ToString(ch, 2);
+                }
+            }
+
+
+            HamGrid.DataSource = Hamming.GetHammings(SplitString(BinaryString.Text, 4));
+                       
+            foreach(var item in Hamming.GetHammings(SplitString(BinaryString.Text, 4)))
+            {
+                EncodedMessage.Text += item.Code;
+            }
+        }
+
+        static string Ham(string s)
+        {
+            string h = "";
+            int x, y, z;
+            x = (s[0] + s[1] + s[3]) % 2;
+            y = (s[0] + s[2] + s[3]) % 2;
+            z = (s[1] + s[2] + s[3]) % 2;
+            h += Convert.ToBoolean(x) ? "1" : "0";
+            h += Convert.ToBoolean(y) ? "1" : "0";
+            h += s[0];
+            h += Convert.ToBoolean(z) ? "1" : "0";
+            h += s[1];
+            h += s[2];
+            h += s[3];
+            return h;
+        }
+
+        string HamDec(string s)
+        {
+            string h = "";
+            int x, y, z, v = 0;
+            x = (s[2] + s[4] + s[6] + s[0]) % 2;
+            y = (s[2] + s[5] + s[6] + s[1]) % 2;
+            z = (s[4] + s[5] + s[6] + s[3]) % 2;
+            v = (Convert.ToBoolean(x) ? 1 : 0) + (Convert.ToBoolean(y) ? 2 : 0) + (Convert.ToBoolean(z) ? 4 : 0);
+            if (v > 0)
+            {
+                char[] charStr = s.ToCharArray();
+                charStr[v - 1] = (s[v - 1] == '1') ? '0' : '1';
+                s = new string(charStr);
+            }
+            h += (s[2] == '1') ? "1" : "0";
+            h += (s[4] == '1') ? "1" : "0";
+            h += (s[5] == '1') ? "1" : "0";
+            h += (s[6] == '1') ? "1" : "0";
+            return h;
+        }
+
+        private void DecodeBtn_Click(object sender, EventArgs e)
+        {
+
+            BinaryString.Text = "";
+            InputMessage2.Text = "";
+            foreach(var item in SplitString(EncodedMessage.Text, 7))
+            {
+                BinaryString.Text += HamDec(item);
+            }
+            InputMessage2.Text = BinaryToString(BinaryString.Text);
+
+        }
+
+        public static string StringToBinary(string data)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (char c in data.ToCharArray())
+            {
+                sb.Append(Convert.ToString(c, 2));
+            }
+            return sb.ToString();
+        }
+
+        public string BinaryToString(string data)
+        {
+            List<Byte> byteList = new List<Byte>();
+            foreach (var item in SplitString(BinaryString.Text, 4))
+            {
+                if (item.Substring(0, 2) != "00100000" || item.Substring(0, 2) != "00101100" || item.Substring(0, 2) != "00101110")
+                {
+                    
+                    byteList.Add(Convert.ToByte(Convert.ToByte(item, 2)*2));
+                }
+                else
+                {
+                    byteList.Add(Convert.ToByte(Convert.ToByte(item, 2) * 2));
+
+                }
+            }
+            return Encoding.GetEncoding(1251).GetString(byteList.ToArray());
+        }
+
+        string CodeCRC(string s)
+        {
+            int i, px = 29;
+            int x = ((s[0] == '1') ? 16 : 0) + ((s[1] == '1') ? 8 : 0) + ((s[2] == '1') ? 4 : 0) + ((s[3] == '1') ? 2 : 0);
+            int ax = x % px;
+            string xa = "";
+            int a = 16;
+            for (i = 0; i < 4; i++)
+            {
+                xa += (ax / a == 1) ? "1" : "0";
+                if (ax / a == 1) ax -= a;
+                a /= 2;
+            }
+            return xa;
+        }
+
+
+        private void CRCBtn_Click(object sender, EventArgs e)
+        {
+            EncodedMessage.Text = "";
+
+            foreach (var item in SplitString(BinaryString.Text, 8, 1))
+            {
+                EncodedMessage.Text += CodeCRC(item);
+
+            }
+
+        }
+
+        string CodeGoll(string s)
+        {
+            int i, px = 2052;
+            int x = ((s[0] == '1') ? 16384 : 0) + ((s[2] == '1') ? 4096 : 0) + ((s[4] == '1') ? 1024 : 0) + ((s[5] == '1') ? 512 : 0) + ((s[6] == '1') ? 256 : 0) + ((s[10] == '1') ? 16 : 0) + ((s[11] == '1') ? 8 : 0);
+            int rx = x % px;
+            int ax = x + rx;
+            string xa = "";
+            int a = 4194304;
+            for (i = 0; i < 23; i++)
+            {
+                xa +=(ax / a == 1) ? "1" : "0";
+                if (ax / a == 1) ax -= a;
+                a /= 2;
+            }
+            return xa;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            EncodedMessage.Text = "";
+
+            var c = BinaryString.Text;
+            string c1 ="";
+            int j = 0;
+            for (int ind = 0; ind < c.Length; ind++)
+            {
+                c1 += ((c[ind] == '1') ? '1' : '0');
+                j++;
+                if (j % 12 == 0)
+                {
+                    EncodedMessage.Text += CodeGoll(c1);
+                    j = 0;
+                    c1 = "";
+                }
+            }
         }
     }
 }
