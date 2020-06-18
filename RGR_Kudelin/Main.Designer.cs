@@ -1,6 +1,6 @@
 ﻿namespace RGR_Kudelin
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -61,6 +62,26 @@
             this.InputMessage2 = new System.Windows.Forms.TextBox();
             this.ChangeBtn1 = new System.Windows.Forms.Button();
             this.ChangeBtn2 = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.InputMessage3 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.StartBtn2 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.EMLenght = new System.Windows.Forms.Label();
+            this.lZ78BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dictionatyStringDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bufferDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lZSSBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dictionaryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bufferDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -75,11 +96,20 @@
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ASCIIGrid)).BeginInit();
             this.panel3.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lZ78BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lZSSBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -123,6 +153,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.InputMessage);
+            this.panel1.Controls.Add(this.EMLenght);
             this.panel1.Controls.Add(this.Avg);
             this.panel1.Controls.Add(this.Entropy);
             this.panel1.Controls.Add(this.StartBtn);
@@ -139,6 +170,8 @@
             this.InputMessage.Name = "InputMessage";
             this.InputMessage.Size = new System.Drawing.Size(649, 62);
             this.InputMessage.TabIndex = 1;
+            this.InputMessage.Text = "Краб забрался на трап, И заснул крепко краб. А кальмар не дремал, Краба в лапы по" +
+    "ймал.";
             // 
             // Avg
             // 
@@ -395,6 +428,8 @@
             this.InputMessage2.Name = "InputMessage2";
             this.InputMessage2.Size = new System.Drawing.Size(772, 32);
             this.InputMessage2.TabIndex = 3;
+            this.InputMessage2.Text = "Краб забрался на трап, И заснул крепко краб. А кальмар не дремал, Краба в лапы по" +
+    "ймал.";
             // 
             // ChangeBtn1
             // 
@@ -416,14 +451,200 @@
             this.ChangeBtn2.UseVisualStyleBackColor = true;
             this.ChangeBtn2.Click += new System.EventHandler(this.ChangeBtn2_Click);
             // 
-            // Form1
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.panel12);
+            this.tabPage3.Controls.Add(this.panel10);
+            this.tabPage3.Controls.Add(this.panel9);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(792, 571);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "LZ";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.StartBtn2);
+            this.panel9.Controls.Add(this.label8);
+            this.panel9.Controls.Add(this.label4);
+            this.panel9.Controls.Add(this.label2);
+            this.panel9.Controls.Add(this.InputMessage3);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(792, 98);
+            this.panel9.TabIndex = 0;
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.dataGridView1);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel10.Location = new System.Drawing.Point(0, 98);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(399, 473);
+            this.panel10.TabIndex = 1;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.dataGridView2);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(399, 98);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(393, 473);
+            this.panel12.TabIndex = 2;
+            // 
+            // InputMessage3
+            // 
+            this.InputMessage3.Location = new System.Drawing.Point(8, 25);
+            this.InputMessage3.Multiline = true;
+            this.InputMessage3.Name = "InputMessage3";
+            this.InputMessage3.Size = new System.Drawing.Size(589, 52);
+            this.InputMessage3.TabIndex = 0;
+            this.InputMessage3.Text = "Краб забрался на трап, И заснул крепко краб. А кальмар не дремал, Краба в лапы по" +
+    "ймал.";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Input message";
+            // 
+            // StartBtn2
+            // 
+            this.StartBtn2.Location = new System.Drawing.Point(603, 25);
+            this.StartBtn2.Name = "StartBtn2";
+            this.StartBtn2.Size = new System.Drawing.Size(181, 52);
+            this.StartBtn2.TabIndex = 2;
+            this.StartBtn2.Text = "Start";
+            this.StartBtn2.UseVisualStyleBackColor = true;
+            this.StartBtn2.Click += new System.EventHandler(this.StartBtn2_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 80);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(34, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "LZSS";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(396, 80);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(32, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "LZ78";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dictionaryDataGridViewTextBoxColumn,
+            this.bufferDataGridViewTextBoxColumn1,
+            this.codeDataGridViewTextBoxColumn1});
+            this.dataGridView1.DataSource = this.lZSSBindingSource;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(399, 473);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AutoGenerateColumns = false;
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dictionatyStringDataGridViewTextBoxColumn,
+            this.bufferDataGridViewTextBoxColumn,
+            this.codeDataGridViewTextBoxColumn});
+            this.dataGridView2.DataSource = this.lZ78BindingSource;
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView2.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(393, 473);
+            this.dataGridView2.TabIndex = 0;
+            this.dataGridView2.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView2_RowPostPaint);
+            // 
+            // EMLenght
+            // 
+            this.EMLenght.AutoSize = true;
+            this.EMLenght.Location = new System.Drawing.Point(261, 77);
+            this.EMLenght.Name = "EMLenght";
+            this.EMLenght.Size = new System.Drawing.Size(127, 13);
+            this.EMLenght.TabIndex = 3;
+            this.EMLenght.Text = "Encoded message lenght";
+            // 
+            // lZ78BindingSource
+            // 
+            this.lZ78BindingSource.DataSource = typeof(RGR_Kudelin.LZ.LZ78);
+            // 
+            // dictionatyStringDataGridViewTextBoxColumn
+            // 
+            this.dictionatyStringDataGridViewTextBoxColumn.DataPropertyName = "DictionatyString";
+            this.dictionatyStringDataGridViewTextBoxColumn.HeaderText = "DictionatyString";
+            this.dictionatyStringDataGridViewTextBoxColumn.Name = "dictionatyStringDataGridViewTextBoxColumn";
+            this.dictionatyStringDataGridViewTextBoxColumn.Width = 106;
+            // 
+            // bufferDataGridViewTextBoxColumn
+            // 
+            this.bufferDataGridViewTextBoxColumn.DataPropertyName = "Buffer";
+            this.bufferDataGridViewTextBoxColumn.HeaderText = "Buffer";
+            this.bufferDataGridViewTextBoxColumn.Name = "bufferDataGridViewTextBoxColumn";
+            this.bufferDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // codeDataGridViewTextBoxColumn
+            // 
+            this.codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
+            this.codeDataGridViewTextBoxColumn.HeaderText = "Code";
+            this.codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
+            this.codeDataGridViewTextBoxColumn.Width = 57;
+            // 
+            // lZSSBindingSource
+            // 
+            this.lZSSBindingSource.DataSource = typeof(RGR_Kudelin.LZ.LZSS);
+            // 
+            // dictionaryDataGridViewTextBoxColumn
+            // 
+            this.dictionaryDataGridViewTextBoxColumn.DataPropertyName = "Dictionary";
+            this.dictionaryDataGridViewTextBoxColumn.HeaderText = "Dictionary";
+            this.dictionaryDataGridViewTextBoxColumn.Name = "dictionaryDataGridViewTextBoxColumn";
+            this.dictionaryDataGridViewTextBoxColumn.Width = 79;
+            // 
+            // bufferDataGridViewTextBoxColumn1
+            // 
+            this.bufferDataGridViewTextBoxColumn1.DataPropertyName = "Buffer";
+            this.bufferDataGridViewTextBoxColumn1.HeaderText = "Buffer";
+            this.bufferDataGridViewTextBoxColumn1.Name = "bufferDataGridViewTextBoxColumn1";
+            this.bufferDataGridViewTextBoxColumn1.Width = 60;
+            // 
+            // codeDataGridViewTextBoxColumn1
+            // 
+            this.codeDataGridViewTextBoxColumn1.DataPropertyName = "Code";
+            this.codeDataGridViewTextBoxColumn1.HeaderText = "Code";
+            this.codeDataGridViewTextBoxColumn1.Name = "codeDataGridViewTextBoxColumn1";
+            this.codeDataGridViewTextBoxColumn1.Width = 57;
+            // 
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 597);
             this.Controls.Add(this.tabControl1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Main";
+            this.Text = "RGR";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -443,6 +664,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.ASCIIGrid)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lZ78BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lZSSBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -482,6 +712,26 @@
         private System.Windows.Forms.TextBox EncodedMessage;
         private System.Windows.Forms.Button ChangeBtn2;
         private System.Windows.Forms.Button ChangeBtn1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button StartBtn2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox InputMessage3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label EMLenght;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dictionatyStringDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bufferDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource lZ78BindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dictionaryDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bufferDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.BindingSource lZSSBindingSource;
     }
 }
 
